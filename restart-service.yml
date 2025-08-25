@@ -1,0 +1,12 @@
+---
+- name: Auto-remediate service failure
+  hosts: "{{ target_host }}"
+  gather_facts: yes
+  become: yes
+  vars:
+    service_name: "{{ service_name | default('httpd') }}"
+  tasks:
+    - name: Ensure service is running
+      ansible.builtin.service:
+        name: "{{ service_name }}"
+        state: started

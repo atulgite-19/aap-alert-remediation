@@ -1,0 +1,21 @@
+---
+- name: Auto-remediate low disk space
+  hosts: "{{ target_host }}"
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Clean /tmp directory
+      ansible.builtin.file:
+        path: /tmp/*
+        state: absent
+        recurse: yes
+      ignore_errors: yes
+
+    - name: Rotate system logs
+      ansible.builtin.command: logrotate -f /etc/logrotate.conf
+      ignore_errors: yes
+
+    - name: Clear journal logs older than 7 days (RedHat)
+      ansible.builtin.command: journalctl --vacuum-time=7d
+      when: ansible_os_family == "RedHat"
+      ignore_errors: yes
