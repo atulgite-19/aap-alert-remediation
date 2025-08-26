@@ -4,7 +4,7 @@
   gather_facts: yes
   become: yes
   vars:
-    service_name: httpd
+    service_name: nginx
   tasks:
     - name: Ensure service is running
       ansible.builtin.service:
