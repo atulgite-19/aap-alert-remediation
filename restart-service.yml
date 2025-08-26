@@ -4,9 +4,9 @@
   gather_facts: yes
   become: yes
   vars:
-    service_name: "{{ service_name | default('httpd') }}"
+    service_name: httpd
   tasks:
     - name: Ensure service is running
       ansible.builtin.service:
         name: "{{ service_name }}"
-        state: started
+        state: restarted
