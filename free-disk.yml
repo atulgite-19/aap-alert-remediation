@@ -1,6 +1,6 @@
 ---
 - name: Auto-remediate low disk space
-  hosts: "{{ target_host }}"
+  hosts: all
   gather_facts: yes
   become: yes
   tasks:

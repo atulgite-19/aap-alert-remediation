@@ -1,6 +1,6 @@
 ---
 - name: Auto-remediate service failure
-  hosts: "{{ target_host }}"
+  hosts: all
   gather_facts: yes
   become: yes
   vars:
